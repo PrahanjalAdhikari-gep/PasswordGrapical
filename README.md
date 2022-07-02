@@ -4,5 +4,6 @@ PineApplePizza
 
 To run:
 
-pip install django\n
+pip install django
+<br/>
 python manage.py runserver
