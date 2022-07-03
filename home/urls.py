@@ -9,12 +9,16 @@ from .views import (
     reset_from_uid,
     register_page_new,
     login_page_new,
+    register_graphical,
+    login_graphical,
     )
 
 urlpatterns = [
     path('', home_page, name='home'),
     path('register/', register_page, name='register'),
     path('register_new/', register_page_new, name='register_new'),
+    path('register_graphical/', register_graphical, name='register_graphical'),
+    path('login_graphical/',login_graphical,name='login_graphical'),
     path('login/', login_page, name='login'),
     path('login_new/', login_page_new, name='login_new'),
     path('login/<str:uid>', login_from_uid, name='login_uid'),

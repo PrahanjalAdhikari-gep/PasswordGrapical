@@ -1,3 +1,6 @@
+from msilib import type_valid
+import re
+from turtle import Turtle
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, logout, login
@@ -7,6 +10,39 @@ from graphical_pwd_auth.settings import N, TBA, EMAIL_HOST_USER, ALLOWED_HOSTS
 from .models import LoginInfo
 import random, uuid
 
+def distance(x_1,y_1,x_2,y_2):
+    x_1 = float(x_1)
+    y_1 = float(y_1)
+    x_2 = float(x_2)
+    y_2 = float(y_2)
+    if (abs(x_1-x_2)> 50 or abs(y_1-y_2)>50):
+        return True
+    else:
+        return False
+
+
+def checkPts(pts, username):
+    user = User.objects.get(username=username)
+    # send email only id user.logininfo.login_link is not None
+    if user.logininfo.pts is None:
+        return False
+    else:
+        init_pts = user.logininfo.pts
+        entered= pts.split(' ')
+        realval= init_pts.split(' ')
+        if len(realval) == len(entered):
+            for i in range(len(realval)):
+                X_1=realval[i].split(',')[0]
+                Y_1=realval[i].split(',')[1]
+
+                X_2=entered[i].split(',')[0]
+                Y_2=entered[i].split(',')[1]
+
+                if distance(X_1, Y_1, X_2, Y_2):
+                    return True
+            return False 
+        else:
+            return True
 
 def get_pwd_imgs():
     # These images are just to confuse the attacker
@@ -27,7 +63,12 @@ def get_pwd_imgs_new():
         p_images.append(images[i:i+N])
     print(p_images)
     return p_images
-    
+
+def get_imgs_graphical():
+    images = [[i] for i in range(0,5)]
+    print(images)
+    return images
+
 
 def update_login_info(user, didSuccess):
     if didSuccess:
@@ -83,18 +124,19 @@ def sendPasswordResetLinkToUser(username):
     link = str(uuid.uuid4())
     user.logininfo.reset_link = link
     user.logininfo.save()
-    email = EmailMessage(
-        subject='Link to Rest your Password',
-        body='''
-        You have requested to reset your password.
-        Click the Link to reset your password directly.
-        The link is one-time clickable
-        link: http://{}:8000/reset/{}
-        '''.format(ALLOWED_HOSTS[-1], link), # might wanna change the allowd_host
-        from_email=EMAIL_HOST_USER,
-        to=[user.email],
-    )
-    email.send()
+    print(link)
+    # email = EmailMessage(
+    #     subject='Link to Rest your Password',
+    #     body='''
+    #     You have requested to reset your password.
+    #     Click the Link to reset your password directly.
+    #     The link is one-time clickable
+    #     link: http://{}:8000/reset/{}
+    #     '''.format(ALLOWED_HOSTS[-1], link), # might wanna change the allowd_host
+    #     from_email=EMAIL_HOST_USER,
+    #     to=[user.email],
+    # )
+    # email.send()
     print('PWD RESET LINK EMAIL SENT')
     return True
 
@@ -145,6 +187,29 @@ def register_page(request):
             'p_images': get_pwd_imgs(),
         }
         return render(request, 'register.html', context=data)
+
+def register_graphical(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        email = request.POST['email']
+        password = request.POST['password']
+        pts = request.POST['points']
+        print(username, password,pts)
+        try:
+            # create user and loginInfo for him
+            user = User.objects.create_user(email=email, username=username, password=password)
+            login_info = LoginInfo(user=user, fails=0, pts=pts)
+            login_info.save()
+            messages.success(request, 'Account created successfully!')
+        except Exception:
+            messages.warning(request, 'Error while creating Account!')
+        
+        return redirect('home')
+    else:
+        data = {
+            'p_images': get_imgs_graphical(),
+        }
+        return render(request, 'register_graphical.html', context=data)
 
 
 def login_page(request):
@@ -222,6 +287,48 @@ def login_page_new(request):
             'p_images': get_pwd_imgs_new(),
         }
         return render(request, 'login_new.html', context=data)
+
+def login_graphical(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        pts = request.POST['points']
+        print(username, password)
+
+        block_status = isBlocked(username)
+        if block_status is None:
+            # No user exists
+            messages.warning(request, 'Account doesn\'t Exist')
+            return redirect('login')
+
+        elif block_status == True:
+            # Blocked - send login link to email
+            # check if previously sent, if not send
+            sendLoginLinkMailToUser(username)
+            messages.warning(request, 'Your account is Blocked, please check your Email!')
+            return redirect('login')
+        else:
+            if checkPts(pts, username):
+                messages.warning(request, 'Login Failed!')
+                return redirect('login_graphical')
+            #Not Blocked
+            user = authenticate(username=username, password=password, request=request)
+            if user is not None:
+                login(request, user)
+                update_login_info(user, True)
+                messages.success(request, 'Login successfull!')
+                return redirect('home')
+            else:
+                user = User.objects.get(username=username)
+                update_login_info(user, False)
+                messages.warning(request, 'Login Failed!')
+                return redirect('login')
+
+    else:
+        data = {
+            'p_images': get_imgs_graphical(),
+        }
+        return render(request, 'login_graphical.html', context=data)
 
 
 def login_from_uid(request, uid):
