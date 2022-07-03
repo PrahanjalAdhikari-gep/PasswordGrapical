@@ -1,4 +1,6 @@
+from ast import Param
 from msilib import type_valid
+from multiprocessing import context
 import re
 from turtle import Turtle
 from django.shortcuts import render, HttpResponse, redirect
@@ -9,6 +11,7 @@ from django.core.mail import EmailMessage
 from graphical_pwd_auth.settings import N, TBA, EMAIL_HOST_USER, ALLOWED_HOSTS
 from .models import LoginInfo
 import random, uuid
+from urlparams.redirect import param_redirect
 
 def distance(x_1,y_1,x_2,y_2):
     x_1 = float(x_1)
@@ -43,6 +46,11 @@ def checkPts(pts, username):
             return False 
         else:
             return True
+
+def getType(username):
+    user = User.objects.get(username=username)
+
+    return user.logininfo.passtype
 
 def get_pwd_imgs():
     # These images are just to confuse the attacker
@@ -153,10 +161,11 @@ def register_page_new(request):
         try:
             # create user and loginInfo for him
             user = User.objects.create_user(email=email, username=username, password=password)
-            login_info = LoginInfo(user=user, fails=0)
+            login_info = LoginInfo(user=user, fails=0, passtype=1)
             login_info.save()
             messages.success(request, 'Account created successfully!')
-        except Exception:
+        except Exception as e:
+            print(e)
             messages.warning(request, 'Error while creating Account!')
         
         return redirect('home')
@@ -175,7 +184,7 @@ def register_page(request):
         try:
             # create user and loginInfo for him
             user = User.objects.create_user(email=email, username=username, password=password)
-            login_info = LoginInfo(user=user, fails=0)
+            login_info = LoginInfo(user=user, fails=0, passtype=0)
             login_info.save()
             messages.success(request, 'Account created successfully!')
         except Exception:
@@ -198,7 +207,7 @@ def register_graphical(request):
         try:
             # create user and loginInfo for him
             user = User.objects.create_user(email=email, username=username, password=password)
-            login_info = LoginInfo(user=user, fails=0, pts=pts)
+            login_info = LoginInfo(user=user, fails=0, pts=pts,passtype=2)
             login_info.save()
             messages.success(request, 'Account created successfully!')
         except Exception:
@@ -246,6 +255,7 @@ def login_page(request):
 
     else:
         data = {
+            'uname': request.GET['uname'],
             'p_images': get_pwd_imgs(),
         }
         return render(request, 'login.html', context=data)
@@ -284,6 +294,7 @@ def login_page_new(request):
 
     else:
         data = {
+            'uname': request.GET['uname'],
             'p_images': get_pwd_imgs_new(),
         }
         return render(request, 'login_new.html', context=data)
@@ -326,10 +337,46 @@ def login_graphical(request):
 
     else:
         data = {
+            'uname': request.GET['uname'],
             'p_images': get_imgs_graphical(),
         }
         return render(request, 'login_graphical.html', context=data)
 
+
+def login_init(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        print(username)
+
+        block_status = isBlocked(username)
+        if block_status is None:
+            # No user exists
+            messages.warning(request, 'Account doesn\'t Exist')
+            return redirect('login_init')
+
+        elif block_status == True:
+            # Blocked - send login link to email
+            # check if previously sent, if not send
+            sendLoginLinkMailToUser(username)
+            messages.warning(request, 'Your account is Blocked, please check your Email!')
+            return redirect('login_init')
+        else:
+            request.method='GET'
+            request.cparam = {'uname': username}
+            typ = getType(username)
+            if(typ == 0):
+                return param_redirect(request,'login')
+            
+
+            if(typ == 1):
+                return param_redirect(request,'login_new')
+            
+            
+            return param_redirect(request,'login_graphical')
+            
+
+    else:
+        return render(request, 'login_init.html')
 
 def login_from_uid(request, uid):
     try:

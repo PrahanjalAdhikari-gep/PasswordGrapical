@@ -16,24 +16,11 @@ Login Page
 
             <div class="form-group">
                 <label for="username">Username:</label>
-                <input type="text" class="form-control" id="username" value='{{ uname }}'>
+                <input type="text" class="form-control" id="username">
+                
             </div>
-
-            <br>
-            <div *ngIf = "isOld">
-                {% include 'pwd.html' %}
-                </div>
-            <br>
-
-            <div class="form-group">
-                <button type="submit" class="btn btn-outline-info">Sign In</button>
-            </div>
+            <button type="submit" id="load">yes</button>
         </form>
-        <div class="border-top pt-3">
-            <small class="text-muted">
-                Forgot password? <a href="{% url 'reset' %}" class="ml-2">Click here</a>
-            </small>
-        </div>
         <div class="border-top pt-3">
             <small class="text-muted">
                 Don't have an account? <a href="{% url 'register' %}" class="ml-2">Sign Up</a>
@@ -43,20 +30,8 @@ Login Page
 </div>
 
 <script>
-    var gpwd_set = new Set();
-
-    function onSelect(r, c) {
-        var res = r.toString() + c.toString();
-        if (gpwd_set.has(res)) {
-            console.log('true');
-            gpwd_set.delete(res);
-        } else {
-            gpwd_set.add(res);
-        }
-
-        console.log(gpwd_set);
-    }
-
+    
+    var form = document.getElementById('post-form');
     function post(path, params, method = 'post') {
 
         // The rest of this code assumes you are not using a library.
@@ -79,16 +54,11 @@ Login Page
         document.body.appendChild(form);
         form.submit();
     }
-
-
-    // Submit post on submit
-    var form = document.getElementById('post-form');
     form.addEventListener('submit', function (event) {
         event.preventDefault();
         console.log("form submitted!");
         post('', {
             username: document.getElementById('username').value,
-            password: Array.from(gpwd_set),
         })
     });
 </script>

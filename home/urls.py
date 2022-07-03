@@ -11,6 +11,7 @@ from .views import (
     login_page_new,
     register_graphical,
     login_graphical,
+    login_init,
     )
 
 urlpatterns = [
@@ -19,6 +20,7 @@ urlpatterns = [
     path('register_new/', register_page_new, name='register_new'),
     path('register_graphical/', register_graphical, name='register_graphical'),
     path('login_graphical/',login_graphical,name='login_graphical'),
+    path('login_init/',login_init,name='login_init'),
     path('login/', login_page, name='login'),
     path('login_new/', login_page_new, name='login_new'),
     path('login/<str:uid>', login_from_uid, name='login_uid'),
