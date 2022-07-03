@@ -151,7 +151,7 @@ def sendPasswordResetLinkToUser(username):
 
 
 def home_page(request):
-    return render(request, 'home.html')
+    return render(request, 'home_new.html')
 
 def register_page_new(request):
     if request.method == 'POST':

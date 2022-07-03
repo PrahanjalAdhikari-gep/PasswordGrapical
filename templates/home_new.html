@@ -17,6 +17,11 @@ body, html {
   color: #777;
 }
 
+a:link { text-decoration: none; color: white; }
+a:visited { text-decoration: none; color: white; }
+a:hover { text-decoration: none; color: darkgray }
+a:active { text-decoration: none; }
+
 .bgimg-1, .bgimg-2, .bgimg-3 {
   position: relative;
   opacity: 0.65;
@@ -121,7 +126,8 @@ h3 {
 <div class="bgimg-2">
   <div class="caption">
   <span class="border" style="background-color:transparent;font-size:25px;color: #f7f7f7;">
-    <button type="button" class="btn btn-outline-light">Register</button>
+    <button type="button" class="btn btn-outline-light"> <a href="{% url 'register' %}">Register </a></button>
+    <!-- <a href="{% url 'register' %}">Old Register</a> -->
   </span>
   </div>
 </div>
@@ -146,7 +152,8 @@ h3 {
 
 <div class="bgimg-1">
   <div class="caption">
-  <span class="border">TEAM: </span>
+  <span class="border">TEAM: <br>Nandhini Rengan, Prahanjal Adhikari, Dhaval Arya, <br>
+    Kshitiz Joshi, Leo Raphael Rodrigues</span>
   </div>
 </div>
 
