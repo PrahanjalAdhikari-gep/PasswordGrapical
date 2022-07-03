@@ -13,15 +13,75 @@
     {% load static %}
 
     <style type="text/css">
-        @import url(https://fonts.googleapis.com/css?family=McLaren&display=swap);
+        @import url('http://fonts.cdnfonts.com/css/thegoodmonolith');
+        @import url('http://fonts.cdnfonts.com/css/popfine');
 
         body {
-            font-family: 'McLaren';
+            font-family: 'TheGoodMonolith', sans-serif;                                                    
             font-style: normal;
             font-weight: 200;
             margin: 0px;
-            background: #DCDCDC;
+            background: rgba(236, 218, 237, 0.9);
         }
+        .hea {
+            font-family: 'POPFINE', sans-serif;                                                                                                                                                                                  
+            font-style: normal;
+            font-weight: 200;
+            display:inline-block;
+        }
+        .bg-dark {
+            background-color: black!important;
+        }
+        .navbar-dark .navbar-nav .nav-link {
+            color: rgba(255,255,255,0.9);
+        }
+        .pics {
+            position: relative;
+            max-width: fit-content;
+            float: left;
+        }
+        .container {
+            position: relative;
+            max-width: fit-content;
+            float: right;
+            padding: 0px 50px 10px 10px;
+        }
+        .form-control {
+            display: block;
+            width: 100%;
+            padding: .375rem .75rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #495057;
+            background-color: rgba(0, 0, 0, 0);
+            background-clip: padding-box;
+            border: 1px solid black;
+            border-radius: .25rem;
+            transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        }
+        .navbar {
+            position: relative;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: normal;
+            -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+            justify-content: space-between;
+            padding-bottom: 1px;
+            height: 60px;
+        }
+        .rotate270 {  
+            -webkit-transform:rotate(270deg);  
+            -moz-transform: rotate(270deg);  
+            -ms-transform: rotate(270deg);  
+            -o-transform: rotate(270deg);  
+            transform: rotate(270deg);  
+        }   
     </style>
 
     <title>
@@ -32,12 +92,11 @@
 </head>
 
 <body>
-
     <nav class="navbar navbar-expand navbar-dark bg-dark sticky-top">
         <a class="navbar-brand" href="{% url 'home' %}">
-            <img src="{% static "images/crypto.jpg" %}" width="30" height="30" class="d-inline-block align-top"
+            <img src="{% static "images/circle.jpg" %}" width="30" height="30" class="d-inline-block align-top rotate270"
                 alt="zzzz">
-            Graphical Password Authentication
+            <span class="hea"><h2>&nbsp PineApplePizza</h2></span>
         </a>
         <div class="navbar-nav ml-auto">
             <a class="nav-item nav-link" href="{% url 'home' %}">Home</a>
@@ -50,6 +109,11 @@
             {% endif %}
         </div>
     </nav>
+
+    <div class = "pics">
+        <img src="{% static "images/back.jpg" %}" width="750" height="1000" class="d-inline-block"
+                alt="zzzz">
+    </div>
 
     <div class="container">
         {% if messages %}
