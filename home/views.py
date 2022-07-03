@@ -64,7 +64,8 @@ def get_pwd_imgs():
 
 def get_pwd_imgs_new():
     # These images are just to confuse the attacker
-    images = [i for i in range(1,37)]
+    images = [i for i in range(1,17)]
+    random.shuffle(images)
     print(images)
     p_images = []
     for i in range(0, N * N, N):
@@ -290,7 +291,7 @@ def login_page_new(request):
                 user = User.objects.get(username=username)
                 update_login_info(user, False)
                 messages.warning(request, 'Login Failed!')
-                return redirect('login')
+                return redirect('login_new')
 
     else:
         data = {
