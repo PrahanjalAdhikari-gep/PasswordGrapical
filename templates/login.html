@@ -20,8 +20,15 @@ Login Page
             </div>
 
             <br>
-            {% include 'pwd.html' %}
-
+            <div *ngIf = "isOld">
+                {% include 'pwd.html' %}
+                </div>
+            <div *ngIf = "isNew">
+            {% include 'pwd_new.html' %}
+            </div>
+            <div *ngIf = "isGraphical">
+                {% include 'pwd_graphical.html' %}
+            </div>
             <br>
 
             <div class="form-group">

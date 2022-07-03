@@ -82,6 +82,41 @@
             -o-transform: rotate(270deg);  
             transform: rotate(270deg);  
         }   
+
+        .dropdown {
+        float: left;
+        }
+        .dropdown .dropbtn {
+        font-size: 16px;  
+        border: none;
+        outline: none;
+        color: white;
+        background-color: inherit;
+        font-family: inherit;
+        margin: 0;
+        }
+        .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+        }
+        .dropdown-content a {
+        float: none;
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        text-align: left;
+        }
+        .dropdown-content a:hover {
+        background-color: #a1f1f2;
+        }
+        .dropdown:hover .dropdown-content {
+        display: block;
+        }
     </style>
 
     <title>
@@ -100,8 +135,17 @@
         </a>
         <div class="navbar-nav ml-auto">
             <a class="nav-item nav-link" href="{% url 'home' %}">Home</a>
-            <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
-
+            <!-- <a class="nav-item nav-link" href="{% url 'register' %}">Register</a> -->
+            <div class="dropdown">
+                <button class="dropbtn nav-link">Register 
+                  <i class="fa fa-caret-down"></i>
+                <div class="dropdown-content">
+                  <a href="{% url 'register' %}">Old Register</a>
+                  <a href="{% url 'register_new' %}">New Register</a>
+                  <a href="{% url 'register_graphical' %}">Register Graphical</a>
+                </div>
+            </button>
+            </div> 
             {% if request.user.is_authenticated %}
             <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
             {% else %}
