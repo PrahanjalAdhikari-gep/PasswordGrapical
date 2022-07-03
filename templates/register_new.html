@@ -97,7 +97,7 @@ Register Page
             images=images-1;
             console.log('true');
             gpwd_set.delete(res);
-            realpwd.delete(src.toString()+res)
+            realpwd.delete(src.toString())
             document.getElementById(res).style.border = null;
             span = document.getElementById('texthere'+res);
             span.textContent = '';
@@ -106,12 +106,11 @@ Register Page
             images=images+1;
             gpwd_set.add(res);
             document.getElementById(res).style.border = "2px solid red";
-            realpwd.add(src.toString()+res);
+            realpwd.add(src.toString());
         }
         var cnt=0;
-        for(const i of realpwd){
-            idd = i.toString().split('png')[1]
-            span=document.getElementById('texthere'+idd);
+        for(const i of gpwd_set){
+            span=document.getElementById('texthere'+i);
             span.textContent = ++cnt;
             span.style.color='red'
         }
