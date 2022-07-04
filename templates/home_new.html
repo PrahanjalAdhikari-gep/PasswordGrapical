@@ -201,7 +201,11 @@ h3 {
 <div class="bgimg-2">
   <div class="caption">
   <span class="border" style="background-color:transparent;font-size:25px;color: #f7f7f7;">
-    <button type="button" class="btn btn-outline-light"> <a href="{% url 'register' %}">Register </a></button>
+    {% if request.user.is_authenticated %}
+    <button type="button" class="btn btn-outline-light"> YOU ARE LOGGED IN </button>
+    {% else %}
+    <button type="button" class="btn btn-outline-light"> YOU ARE NOT LOGGED IN </button>
+    {% endif %}
     <!-- <a href="{% url 'register' %}">Old Register</a> -->
   </span>
   </div>

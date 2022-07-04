@@ -30,9 +30,9 @@ Register Page
 
 
                 <div class="form-group">
-                    <small class="text-danger">
+                    <revert class="text-danger">
                         Note: Click a point on every image and make sure to remember it! 
-                    </small>
+                    </revert>
                 </div>
 
                 <br>
@@ -120,7 +120,7 @@ Register Page
         } else {
             images=images+1;
             gpwd_set[res]=pos;
-            document.getElementById(res).style.border = "2px solid red";
+            document.getElementById(res).style.border = "2px solid antiquewhite";
             realpwd.add(src.toString()+res);
         }
         var cnt=0;
@@ -131,7 +131,7 @@ Register Page
             span=document.getElementById('texthere'+idd);
             pts[cnt]=(gpwd_set[idd].split(',')[0]+','+gpwd_set[idd].split(',')[1]);
             span.textContent = ++cnt+' '+gpwd_set[idd].split(',')[0]+','+gpwd_set[idd].split(',')[1]
-            span.style.color='red'
+            span.style.color='antiquewhite'
             console.log(Array.from(realpwd));
         }
         console.log(pts);

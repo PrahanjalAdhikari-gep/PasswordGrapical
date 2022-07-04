@@ -32,6 +32,11 @@
             display:inline-block;
         }
 
+        .no-gutters {
+            margin-right: 30px;
+            margin-left: 0;
+        }
+
         .btn-outline-info {
             color: antiquewhite;
             background-color: rgba(0,0,0,0.5);
@@ -86,6 +91,13 @@
             border-radius: .25rem;
             transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
         }
+
+        .form-control:disabled, .form-control[readonly] {
+            background-color: transparent;
+            opacity: 1;
+            color: antiquewhite;
+        }
+
         .navbar {
             position: relative;
             display: -webkit-box;
