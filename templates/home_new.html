@@ -171,6 +171,22 @@ h3 {
 <body>
 
 <div class="bgimg-1">
+  <div class="wrapperin">
+    <div class="wrapper"> 
+        <div class="container">
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+            {% endif %}
+
+            {% block content %}
+
+            {% endblock %}
+        </div>
+    </div> </div>
   <div class="caption">
   <span class="border">PINEAPPLE PIZZA</span>
   <img src="../static/images/circleblack.png" width="30 px" height="30 px">
