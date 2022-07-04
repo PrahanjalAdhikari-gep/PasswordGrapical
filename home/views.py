@@ -54,7 +54,7 @@ def getType(username):
 
 def get_pwd_imgs():
     # These images are just to confuse the attacker
-    images = random.sample(range(1, 39), N * N)
+    images = random.sample(range(1, 17), N * N)
     print(images)
     p_images = []
     for i in range(0, N * N, N):
