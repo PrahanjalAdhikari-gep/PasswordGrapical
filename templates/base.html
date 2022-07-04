@@ -20,8 +20,9 @@
             font-family: 'TheGoodMonolith', sans-serif;                                                    
             font-style: normal;
             font-weight: 200;
+            color: white;
             margin: 0px;
-            background: lightgray;
+            background: black;
         }
         .hea {
             font-family: 'POPFINE', sans-serif;                                                                                                                                                                                  
@@ -35,16 +36,11 @@
         .navbar-dark .navbar-nav .nav-link {
             color: rgba(255,255,255,0.9);
         }
-        .pics {
-            position: relative;
-            max-width: fit-content;
-            float: left;
-        }
         .container {
-            position: relative;
-            max-width: fit-content;
-            float: right;
+            position: absolute;
+            max-width: 100%;
             padding: 0px 50px 10px 10px;
+            opacity: 1!important;
         }
         .form-control {
             display: block;
@@ -52,10 +48,10 @@
             padding: .375rem .75rem;
             font-size: 1rem;
             line-height: 1.5;
-            color: #495057;
+            color: whitesmoke;
             background-color: rgba(0, 0, 0, 0);
             background-clip: padding-box;
-            border: 1px solid black;
+            border: 1px solid white;
             border-radius: .25rem;
             transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
         }
@@ -81,7 +77,23 @@
             -ms-transform: rotate(270deg);  
             -o-transform: rotate(270deg);  
             transform: rotate(270deg);  
-        }   
+        }  
+        
+        .wrapper {
+            height: 100vh;
+            overflow-x: hidden;
+            overflow-y: auto;
+            perspective: 2px;
+            position: relative;
+        }
+        .wrapperin {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-image: url("../static/images/back2.jpg");
+            min-height: 100%;
+        }
 
         .dropdown {
         float: left;
@@ -112,10 +124,22 @@
         text-align: left;
         }
         .dropdown-content a:hover {
-        background-color: #a1f1f2;
+        color: whitesmoke;
+        background-color: #524f5b;
         }
         .dropdown:hover .dropdown-content {
         display: block;
+        }
+        .text-muted {
+        color: white!important;
+        }
+        .text-muted a{
+        color: white;
+        text-decoration: none;
+        background-color: transparent;
+        -webkit-text-decoration-skip: objects;
+        border: 1px solid white;
+        padding: 3px;
         }
     </style>
 
@@ -154,24 +178,22 @@
         </div>
     </nav>
 
-    <div class = "pics">
-        <img src="{% static "images/background.jpg" %}" width="750" height="1000" class="d-inline-block"
-                alt="zzzz">
-    </div>
+    <div class="wrapperin">
+    <div class="wrapper"> 
+        <div class="container">
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+            {% endif %}
 
-    <div class="container">
-        {% if messages %}
-        {% for message in messages %}
-        <div class="alert alert-{{ message.tags }}">
-            {{ message }}
+            {% block content %}
+
+            {% endblock %}
         </div>
-        {% endfor %}
-        {% endif %}
-
-        {% block content %}
-
-        {% endblock %}
-    </div>
+    </div> </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

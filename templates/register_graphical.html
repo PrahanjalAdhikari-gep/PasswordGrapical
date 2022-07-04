@@ -44,7 +44,7 @@ Register Page
             </form>
             <div class="border-top pt-3">
                 <small class="text-muted">
-                    Already have an account? <a href="{% url 'login' %}" class="ml-2">Sign In</a>
+                    Already have an account? <a href="{% url 'login_init' %}" class="ml-2">Sign In</a>
                 </small>
             </div>
         </div>
@@ -57,19 +57,19 @@ Register Page
     var pts= [];
     var images = 0;
     var realpwd = new Set();
-    {% comment %} function onSelect(r, c) {
-        var res = r.toString() + c.toString();
-        if (gpwd_set.has(res)) {
-            console.log('true');
-            gpwd_set.delete(res);
-            document.getElementById(res).style.border = null;
-        } else {
-            gpwd_set.add(res);
-            document.getElementById(res).style.border = "2px solid red";
-        }
+    // {% comment %} function onSelect(r, c) {
+    //     var res = r.toString() + c.toString();
+    //     if (gpwd_set.has(res)) {
+    //         console.log('true');
+    //         gpwd_set.delete(res);
+    //         document.getElementById(res).style.border = null;
+    //     } else {
+    //         gpwd_set.add(res);
+    //         document.getElementById(res).style.border = "2px solid red";
+    //     }
 
-        console.log(gpwd_set);
-    } {% endcomment %}
+    //     console.log(gpwd_set);
+    // } {% endcomment %}
 
     function post(path, params, method = 'post') {
 
@@ -138,36 +138,36 @@ Register Page
         });
       });
     
-    {% comment %} function CallOfferRenderAction(r,c,src,offset) {
-        var res = r.toString() +','+ c.toString();
-        let span;
-        var X= this.pageX
-        var Y= this.pageY
-        console.log(this)
-        var pos = "jpg"+X+"jpg"+Y;
-        if (gpwd_set.has(res)) {
-            images=images-1;
-            console.log('true');
-            gpwd_set.delete(res);
-            realpwd.delete(src.toString()+res+pos)
-            document.getElementById(res).style.border = null;
-            span = document.getElementById('texthere'+res);
-            span.textContent = '';
-            span.style.color='red'
-        } else {
-            images=images+1;
-            gpwd_set.add(res);
-            document.getElementById(res).style.border = "2px solid red";
-            realpwd.add(src.toString()+res+pos);
-        }
-        var cnt=0;
-        for(const i of realpwd){
-            idd = i.toString().split('jpg')[1]
-            span=document.getElementById('texthere'+idd);
-            span.textContent = ++cnt+i.toString().split('jpg')[2]+' '+i.toString().split('jpg')[3];
-            span.style.color='red'
-        }
-    } {% endcomment %}
+    // {% comment %} function CallOfferRenderAction(r,c,src,offset) {
+    //     var res = r.toString() +','+ c.toString();
+    //     let span;
+    //     var X= this.pageX
+    //     var Y= this.pageY
+    //     console.log(this)
+    //     var pos = "jpg"+X+"jpg"+Y;
+    //     if (gpwd_set.has(res)) {
+    //         images=images-1;
+    //         console.log('true');
+    //         gpwd_set.delete(res);
+    //         realpwd.delete(src.toString()+res+pos)
+    //         document.getElementById(res).style.border = null;
+    //         span = document.getElementById('texthere'+res);
+    //         span.textContent = '';
+    //         span.style.color='red'
+    //     } else {
+    //         images=images+1;
+    //         gpwd_set.add(res);
+    //         document.getElementById(res).style.border = "2px solid red";
+    //         realpwd.add(src.toString()+res+pos);
+    //     }
+    //     var cnt=0;
+    //     for(const i of realpwd){
+    //         idd = i.toString().split('jpg')[1]
+    //         span=document.getElementById('texthere'+idd);
+    //         span.textContent = ++cnt+i.toString().split('jpg')[2]+' '+i.toString().split('jpg')[3];
+    //         span.style.color='red'
+    //     }
+    // } {% endcomment %}
     // Submit post on submit
     var form = document.getElementById('post-form');
     form.addEventListener('submit', function (event) {
