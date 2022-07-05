@@ -12,6 +12,7 @@ from .views import (
     register_graphical,
     login_graphical,
     login_init,
+    login_after
     )
 
 urlpatterns = [
@@ -27,4 +28,6 @@ urlpatterns = [
     path('logout/', logout_page, name='logout'),
     path('reset/', reset_view, name='reset'),
     path('reset/<str:uid>', reset_from_uid, name='reset_uid'),
+    path('login_after/', login_after, name='login_after'),
+    
 ]
