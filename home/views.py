@@ -232,14 +232,18 @@ def login_page(request):
         if block_status is None:
             # No user exists
             messages.warning(request, 'Account doesn\'t Exist')
-            return redirect('login')
+            request.method='GET'
+            request.cparam = {'uname': username}
+            return param_redirect(request,'login')
 
         elif block_status == True:
             # Blocked - send login link to email
             # check if previously sent, if not send
             sendLoginLinkMailToUser(username)
             messages.warning(request, 'Your account is Blocked, please check your Email!')
-            return redirect('login')
+            request.method='GET'
+            request.cparam = {'uname': username}
+            return param_redirect(request,'login')
         else:
             # Not Blocked
             user = authenticate(username=username, password=password, request=request)
@@ -252,7 +256,9 @@ def login_page(request):
                 user = User.objects.get(username=username)
                 update_login_info(user, False)
                 messages.warning(request, 'Login Failed!')
-                return redirect('login')
+                request.method='GET'
+                request.cparam = {'uname': username}
+                return param_redirect(request,'login')
 
     else:
         data = {
@@ -271,14 +277,18 @@ def login_page_new(request):
         if block_status is None:
             # No user exists
             messages.warning(request, 'Account doesn\'t Exist')
-            return redirect('login')
+            request.method='GET'
+            request.cparam = {'uname': username}
+            return param_redirect(request,'login_new')
 
         elif block_status == True:
             # Blocked - send login link to email
             # check if previously sent, if not send
             sendLoginLinkMailToUser(username)
             messages.warning(request, 'Your account is Blocked, please check your Email!')
-            return redirect('login')
+            request.method='GET'
+            request.cparam = {'uname': username}
+            return param_redirect(request,'login_new')
         else:
             # Not Blocked
             user = authenticate(username=username, password=password, request=request)
@@ -291,7 +301,9 @@ def login_page_new(request):
                 user = User.objects.get(username=username)
                 update_login_info(user, False)
                 messages.warning(request, 'Login Failed!')
-                return redirect('login_new')
+                request.method='GET'
+                request.cparam = {'uname': username}
+                return param_redirect(request,'login_new')
 
     else:
         data = {
@@ -311,18 +323,24 @@ def login_graphical(request):
         if block_status is None:
             # No user exists
             messages.warning(request, 'Account doesn\'t Exist')
-            return redirect('login')
+            request.method='GET'
+            request.cparam = {'uname': username}
+            return param_redirect(request,'login_graphical')
 
         elif block_status == True:
             # Blocked - send login link to email
             # check if previously sent, if not send
             sendLoginLinkMailToUser(username)
             messages.warning(request, 'Your account is Blocked, please check your Email!')
-            return redirect('login')
+            request.method='GET'
+            request.cparam = {'uname': username}
+            return param_redirect(request,'login_graphical')
         else:
             if checkPts(pts, username):
                 messages.warning(request, 'Login Failed!')
-                return redirect('login_graphical')
+                request.method='GET'
+                request.cparam = {'uname': username}
+                return param_redirect(request,'login_graphical')
             #Not Blocked
             user = authenticate(username=username, password=password, request=request)
             if user is not None:
