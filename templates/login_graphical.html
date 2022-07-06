@@ -56,7 +56,7 @@ Login Page
             document.getElementById(res).style.border = null;
         } else {
             gpwd_set.add(res);
-            document.getElementById(res).style.border = "2px solid red";
+            document.getElementById(res).style.border = "2px solid antiquewhite";
         }
 
         console.log(gpwd_set);
@@ -111,7 +111,7 @@ Login Page
         } else {
             images=images+1;
             gpwd_set[res]=pos;
-            document.getElementById(res).style.border = "2px solid red";
+            document.getElementById(res).style.border = "2px solid antiquewhite";
             realpwd.add(src.toString()+res);
         }
         var cnt=0;
@@ -122,7 +122,7 @@ Login Page
             span=document.getElementById('texthere'+idd);
             pts[cnt]=(gpwd_set[idd].split(',')[0]+','+gpwd_set[idd].split(',')[1]);
             span.textContent = ++cnt+' '+gpwd_set[idd].split(',')[0]+','+gpwd_set[idd].split(',')[1]
-            span.style.color='red'
+            span.style.color='antiquewhite'
             console.log(Array.from(realpwd));
         }
         console.log(pts);
@@ -144,11 +144,11 @@ Login Page
             document.getElementById(res).style.border = null;
             span = document.getElementById('texthere'+res);
             span.textContent = '';
-            span.style.color='red'
+            span.style.color='antiquewhite'
         } else {
             images=images+1;
             gpwd_set.add(res);
-            document.getElementById(res).style.border = "2px solid red";
+            document.getElementById(res).style.border = "2px solid antiquewhite";
             realpwd.add(src.toString()+res+pos);
         }
         var cnt=0;
@@ -156,7 +156,7 @@ Login Page
             idd = i.toString().split('jpg')[1]
             span=document.getElementById('texthere'+idd);
             span.textContent = ++cnt+i.toString().split('jpg')[2]+' '+i.toString().split('jpg')[3];
-            span.style.color='red'
+            span.style.color='antiquewhite'
         }
     } {% endcomment %}
     // Submit post on submit

@@ -251,7 +251,7 @@ def login_page(request):
                 login(request, user)
                 update_login_info(user, True)
                 messages.success(request, 'Login successfull!')
-                return redirect('home')
+                return redirect('login_after')
             else:
                 user = User.objects.get(username=username)
                 update_login_info(user, False)
@@ -296,7 +296,7 @@ def login_page_new(request):
                 login(request, user)
                 update_login_info(user, True)
                 messages.success(request, 'Login successfull!')
-                return redirect('home')
+                return redirect('login_after')
             else:
                 user = User.objects.get(username=username)
                 update_login_info(user, False)
@@ -347,7 +347,7 @@ def login_graphical(request):
                 login(request, user)
                 update_login_info(user, True)
                 messages.success(request, 'Login successfull!')
-                return redirect('home')
+                return redirect('login_after')
             else:
                 user = User.objects.get(username=username)
                 update_login_info(user, False)
@@ -463,3 +463,6 @@ def logout_page(request):
     logout(request)
     messages.warning(request, 'You\'ve been logged out!')
     return redirect('home')
+
+def login_after(request):
+    return render(request, 'login_after.html')
