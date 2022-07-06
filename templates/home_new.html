@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="../static/images/circle.jpg">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-
+<title>Home</title> 
 
 <style>
 
@@ -31,7 +31,6 @@ a:active { text-decoration: none; }
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-
 }
 .bgimg-1 {
   background-image: url("../static/images/background.jpg");
@@ -222,7 +221,7 @@ h3 {
                 <i class="fa fa-caret-down"></i>
               <div class="dropdown-content">
                 <a href="{% url 'register' %}">Register Position</a>
-                <a href="{% url 'register_new' %}">Reigster Pattern</a>
+                <a href="{% url 'register_new' %}">Register Pattern</a>
                 <a href="{% url 'register_graphical' %}">Register Graphical</a>
               </div>
           </button> <hr>
@@ -234,6 +233,7 @@ h3 {
           {% endif %}
       </div>
       </div>
+      <img src = "../static/images/gep-seeklogo.com.svg" height="100px" width="100px" style="padding-bottom: 48px; filter: invert(91%) sepia(76%) saturate(2%) hue-rotate(297deg) brightness(108%) contrast(101%);"> </img>
   </nav>
   </div>
 </div>
