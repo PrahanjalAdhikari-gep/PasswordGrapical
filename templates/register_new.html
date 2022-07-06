@@ -119,12 +119,17 @@ Register Page
     var form = document.getElementById('post-form');
     form.addEventListener('submit', function (event) {
         event.preventDefault();
-        console.log("form submitted!");
-        post('', {
-            username: document.getElementById('username').value,
-            email: document.getElementById('email').value,
-            password: Array.from(realpwd),
-        })
+        if(realpwd.size===0){
+            alert("Atleast select one picture");
+        }
+        else{
+            console.log("form submitted!");
+            post('', {
+                username: document.getElementById('username').value,
+                email: document.getElementById('email').value,
+                password: Array.from(realpwd),
+            })
+        }
     });
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>

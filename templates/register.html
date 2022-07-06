@@ -94,13 +94,17 @@ Register Page
     // Submit post on submit
     var form = document.getElementById('post-form');
     form.addEventListener('submit', function (event) {
-        event.preventDefault();
+        event.preventDefault();if(realpwd.size===0){
+            alert("Atleast select one picture");
+        }
+        else{
         console.log("form submitted!");
-        post('', {
-            username: document.getElementById('username').value,
-            email: document.getElementById('email').value,
-            password: Array.from(gpwd_set),
-        })
+            post('', {
+                username: document.getElementById('username').value,
+                email: document.getElementById('email').value,
+                password: Array.from(gpwd_set),
+            })
+        }
     });
 </script>
 {% endblock %}
