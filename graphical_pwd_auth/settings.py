@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+from telnetlib import AUTHENTICATION
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -74,7 +75,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'graphical_pwd_auth.wsgi.application'
 
-
+AUTHENTICATION_BACKENDS = ["django.contrib.auth.backends.ModelBackend"]
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
@@ -141,5 +142,5 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
+EMAIL_HOST_USER = 'aditibhakuni1005@gmail.com'
+EMAIL_HOST_PASSWORD = 'vgkfontqmpdjzvsr'

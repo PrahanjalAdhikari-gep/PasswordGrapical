@@ -1,0 +1,24 @@
+<!-- {% load static %} -->
+<div class="form-group">
+    <label for="password">Password:</label>
+    <br>
+    <br>
+    {% for row in p_images %}
+    <div class="row">
+        {% for col in row %}
+        <div class="col-9 flex-fill">
+            <div class="thumbnail">
+            <!-- {{ forloop.parentloop.counter0  }}-{{ forloop.counter0  }} -->
+                <img class='photo'src='{% static 'images/' %}{{ col }}.jpg' alt=" img" style="
+                width:100%" id="{{ forloop.parentloop.counter0  }}{{ forloop.counter0  }}"
+                onclick="CallOfferRenderAction({{forloop.parentloop.counter0}}, {{forloop.counter0}}, $(this).attr('src'))">
+                <div class="caption">
+                    <span id="texthere{{ forloop.parentloop.counter0  }}{{ forloop.counter0  }}"></span>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div style="padding-bottom: 15px;"></div>
+    {% endfor %}
+</div>

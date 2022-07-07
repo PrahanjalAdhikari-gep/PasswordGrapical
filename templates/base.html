@@ -262,6 +262,9 @@ LOGIN PAGE OVER */
         <div class="navbar-nav ml-auto">
             <a class="nav-item nav-link" href="{% url 'home' %}">Home</a>
             <!-- <a class="nav-item nav-link" href="{% url 'register' %}">Register</a> -->
+            {% if request.user.is_authenticated %}
+            <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
+            {% else %}
             <div class="dropdown">
                 <button class="dropbtn nav-link">Register 
                   <i class="fa fa-caret-down"></i>
@@ -269,12 +272,10 @@ LOGIN PAGE OVER */
                     <a href="{% url 'register' %}">Register Position</a>
                     <a href="{% url 'register_new' %}">Register Pattern</a>
                     <a href="{% url 'register_graphical' %}">Register Graphical</a>
+                    <a href="{% url 'register_story' %}">Register Story</a>
                 </div>
             </button>
             </div> 
-            {% if request.user.is_authenticated %}
-            <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
-            {% else %}
             <a class="nav-item nav-link" href="{% url 'login_init' %}">Login</a>
             {% endif %}
         </div>

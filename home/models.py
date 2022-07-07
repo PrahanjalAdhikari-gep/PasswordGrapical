@@ -8,6 +8,7 @@ class LoginInfo(models.Model):
     reset_link = models.CharField(unique=True, blank=True, null=True, max_length=225)
     pts = models.CharField(unique=False, blank=True, null= True, max_length= 500)
     passtype = models.PositiveSmallIntegerField(default=0)
+    sec_key= models.CharField(unique=False, blank=True, null= True, max_length= 500)
 
     def __str__(self):
         return self.user.username
