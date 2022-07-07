@@ -232,6 +232,26 @@ def sendPasswordResetLinkToUser(username):
 def home_page(request):
     return render(request, 'home_new.html')
 
+def register_moving(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        email = request.POST['email']
+        password = request.POST['password']
+        print(username, password)
+        try:
+            # create user and loginInfo for him
+            user = User.objects.create_user(email=email, username=username, password=password)
+            login_info = LoginInfo(user=user, fails=0, passtype=4)
+            login_info.save()
+            messages.success(request, 'Account created successfully!')
+        except Exception as e:
+            print(e)
+            messages.warning(request, 'Error while creating Account!')
+        
+        return redirect(request, 'register_moving.html')
+    else:
+        return render(request, 'register_moving.html')
+
 def register_page_new(request):
     if request.method == 'POST':
         username = request.POST['username']
