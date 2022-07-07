@@ -16,6 +16,7 @@ from .views import (
     register_story,
     login_page_story,
     register_moving,
+    login_page_moving,
     )
 
 urlpatterns = [
@@ -35,4 +36,5 @@ urlpatterns = [
     path('register_story/',register_story,name='register_story'),
     path('login_story/',login_page_story,name='login_story'),
     path('register_moving/',register_moving,name='register_moving'),
+    path('login_moving/',login_page_moving,name='login_moving'),
 ]

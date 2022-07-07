@@ -1,8 +1,20 @@
+<!-- {% load static %} -->
 <div class="form-group">
     <label for="password">Password:</label>
      <div class="main"  height = "600px">
-   
+      
+            {% for row in p_images %}
             <div class="single-column">
+               {% for col in row %}
+                  <!-- {{ forloop.parentloop.counter0  }}-{{ forloop.counter0  }} -->
+                  <a href="#">
+                  <img src='{% static 'images/pwd/' %}{{ col }}.jpg' alt=" image" id="{{ forloop.parentloop.counter0  }}{{ forloop.counter0  }}"
+                        onclick="CallOfferRenderAction({{forloop.parentloop.counter0}}, {{forloop.counter0}}, $(this).attr('src'))">
+                  </a>
+                  {% endfor %}
+               </div>
+            {% endfor %}
+            {% comment %} <div class="single-column">
             <a href="#"><img src="https://picsum.photos/300/300?random=1" alt="image"></a>
             <a href="#"><img src="https://picsum.photos/300/300?random=2" alt="image"></a>
             <a href="#"><img src="https://picsum.photos/300/300?random=3" alt="image"></a>
@@ -31,13 +43,13 @@
             <a href="#"><img src="https://picsum.photos/300/300?random=26" alt="image"></a>
             <a href="#"><img src="https://picsum.photos/300/300?random=27" alt="image"></a>
             <a href="#"><img src="https://picsum.photos/300/300?random=28" alt="image"></a>
-            </div>
-        </div>
+            </div> {% endcomment %}
+      </div>
 </div>
-   <script> 
+<script> 
 [...document.querySelectorAll('.single-column')].map(column => {
  column.style.setProperty('--animation', 'slide');
  column.style.setProperty('height', '200%');
  column.innerHTML = column.innerHTML + column.innerHTML;
 });
-   </script>
+</script>

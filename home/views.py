@@ -250,7 +250,10 @@ def register_moving(request):
         
         return redirect(request, 'register_moving.html')
     else:
-        return render(request, 'register_moving.html')
+        data = {
+            'p_images': get_pwd_imgs(),
+        }
+        return render(request, 'register_moving.html', context=data)
 
 def register_page_new(request):
     if request.method == 'POST':
@@ -387,6 +390,50 @@ def login_page_story(request):
         }
         return render(request, 'login_story.html', context=data)
 
+def login_page_moving(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        print(username, password)
+
+        block_status = isBlocked(username)
+        if block_status is None:
+            # No user exists
+            messages.warning(request, 'Account doesn\'t Exist')
+            request.method='GET'
+            request.cparam = {'uname': username}
+            return param_redirect(request,'login_moving')
+
+        elif block_status == True:
+            # Blocked - send login link to email
+            # check if previously sent, if not send
+            sendLoginLinkMailToUser(username)
+            messages.warning(request, 'Your account is Blocked, please check your Email!')
+            request.method='GET'
+            request.cparam = {'uname': username}
+            return param_redirect(request,'login_moving')
+        else:
+            # Not Blocked
+            user = authenticate(username=username, password=password, request=request)
+            if user is not None:
+                login(request, user)
+                update_login_info(user, True)
+                messages.success(request, 'Login successfull!')
+                return redirect('login_after')
+            else:
+                user = User.objects.get(username=username)
+                update_login_info(user, False)
+                messages.warning(request, 'Login Failed!')
+                request.method='GET'
+                request.cparam = {'uname': username}
+                return param_redirect(request,'login_moving')
+
+    else:
+        data = {
+            'uname': request.GET['uname'],
+            'p_images': get_pwd_imgs(),
+        }
+        return render(request, 'login_new.html', context=data)
 
 def login_page(request):
     if request.method == 'POST':
