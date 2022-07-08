@@ -23,11 +23,12 @@ Register Page
                     <label for="email">Email:</label>
                     <input type="email" class="form-control" id="email">
                 </div>
-
+            <div class = "story-nav">
+             <nav role="navigation" class="primary-navigation">
                 <div class="row no-gutters" >
                     <div class="col-2 no-gutters">
                         <div class="dropdown">
-                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id="subject">Sub
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id="subject">SUB.
                                 <span class="caret"></span></button>
                                 <ul class="dropdown-menu">
                                     <li><a onclick="onclic(0,$(this).text())">HE</a></li>
@@ -40,7 +41,7 @@ Register Page
                     <div class="row no-gutters">
                         <div class="col-2 no-gutters">
                             <div class="dropdown">
-                                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id="verb">Verb
+                                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id="verb">VERB
                                     <span class="caret"></span></button>
                                     <ul class="dropdown-menu">
                                         <li><a onclick="onclic(1,$(this).text())">EATS</a></li>
@@ -53,7 +54,7 @@ Register Page
                     <div class="row no-gutters">
                         <div class="col-2 no-gutters">
                             <div class="dropdown">
-                                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id="adjective">Adj.
+                                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id="adjective">ADJ.
                                     <span class="caret"></span></button>
                                     <ul class="dropdown-menu">
                                         <li><a onclick="onclic(2,$(this).text())">FAST</a></li>
@@ -66,7 +67,7 @@ Register Page
                         <div class="row no-gutters">
                             <div class="col-2 no-gutters">
                                 <div class="dropdown">
-                                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id="predicate">Pred.
+                                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id="predicate">PRED.
                                         <span class="caret"></span></button>
                                         <ul class="dropdown-menu">
                                             <li><a onclick="onclic(3,$(this).text())">APPLE</a></li>
@@ -77,6 +78,8 @@ Register Page
                                 </div>
                             </div>
                         </div>
+                </nav>
+            </div>
                             {% comment %} {% include 'pwd_story.html' %}
                             <div class="form-group">
                                 <small class="text-danger">
