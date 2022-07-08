@@ -8,7 +8,7 @@
                {% for col in row %}
                   <!-- {{ forloop.parentloop.counter0  }}-{{ forloop.counter0  }} -->
                   <a href="#">
-                  <img src='{% static 'images/moving/' %}{{ col }}.jpg' alt=" image" id="{{ forloop.parentloop.counter0  }}{{ forloop.counter0  }}"
+                  <img src='{% static 'images/moving/' %}{{ col }}.jpeg' alt=" image" id="{{ forloop.parentloop.counter0  }}{{ forloop.counter0  }}"
                         onclick="CallOfferRenderAction({{forloop.parentloop.counter0}}, {{forloop.counter0}}, $(this).attr('src'))">
                   </a>
                   {% endfor %}
