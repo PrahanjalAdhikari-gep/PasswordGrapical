@@ -187,7 +187,7 @@ def sendLoginLinkMailToUser(username):
         em.set_content(body)
 
         context = ssl.create_default_context()
-        with smtplib.SMTP_SSL('smtp.gmail.com',587,context=context) as smtp:
+        with smtplib.SMTP_SSL('smtp.gmail.com',465,context=context) as smtp:
             smtp.login(email_sender,email_password)
             smtp.sendmail(email_sender,email_reciever,em.as_string())
         print('LOGIN LINK EMAIL SENT')
@@ -210,10 +210,9 @@ def sendPasswordResetLinkToUser(username):
     email_reciever= user.email
     subject ='Link to Log in to your account'
     body='''
-        Someone tried to bruteforce on your account.
-        Click the Link to Login to your account directly.
+        Click the Link to reset the password.
         The link is one-time clickable
-        link: http://{}:8000/login/{}
+        link: http://{}:8000/reset/{}
         '''.format(ALLOWED_HOSTS[-1], link)
     em = EmailMessage()
     em['From'] = email_sender
@@ -222,7 +221,7 @@ def sendPasswordResetLinkToUser(username):
     em.set_content(body)
 
     context = ssl.create_default_context()
-    with smtplib.SMTP_SSL('smtp.gmail.com',587,context=context) as smtp:
+    with smtplib.SMTP_SSL('smtp.gmail.com',465,context=context) as smtp:
         smtp.login(email_sender,email_password)
         smtp.sendmail(email_sender,email_reciever,em.as_string())
     print('PWD RESET LINK EMAIL SENT')

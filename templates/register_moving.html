@@ -99,21 +99,23 @@ Register Page
             mpwd_set.delete(res);
             mrealpwd.delete(src.toString())
             document.getElementById(res).style.border = null;
-            span = document.getElementById('texthere'+res);
+            {% comment %} span = document.getElementById('texthere'+res);
             span.textContent = '';
-            span.style.color='antiquewhite'
+            span.style.color='antiquewhite' {% endcomment %}
         } else {
             mimages=mimages+1;
             mpwd_set.add(res);
             document.getElementById(res).style.border = "2px solid red";
             mrealpwd.add(src.toString());
+            console.log(res)
+            console.log(src)
         }
         var cnt=0;
-        for(const i of mpwd_set){
+        {% comment %} for(const i of mpwd_set){
             span=document.getElementById('texthere'+i);
             span.textContent = ++cnt;
             span.style.color='antiquewhite'
-        }
+        } {% endcomment %}
     }
     // Submit post on submit
     var form = document.getElementById('post-form');
