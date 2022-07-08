@@ -14,7 +14,7 @@ Login Page
             </fieldset>
 
             <div class="form-group">
-                <label for="username">UsernamE:</label>
+                <label for="username">Username:</label>
                 <input type="text" class="form-control" id="username" value='{{ uname }}'>
             </div>
 
@@ -90,9 +90,9 @@ Login Page
             mpwd_set.delete(res);
             mrealpwd.delete(src.toString())
             document.getElementById(res).style.border = null;
-            {% comment %} span = document.getElementById('texthere'+res);
-            span.textContent = '';
-            span.style.color='antiquewhite' {% endcomment %}
+            // {% comment %} span = document.getElementById('texthere'+res);
+            // span.textContent = '';
+            // span.style.color='antiquewhite' {% endcomment %}
         } else {
             mimages=mimages+1;
             mpwd_set.add(res);
@@ -102,11 +102,11 @@ Login Page
             console.log(src)
         }
         var cnt=0;
-        {% comment %} for(const i of mpwd_set){
-            span=document.getElementById('texthere'+i);
-            span.textContent = ++cnt;
-            span.style.color='antiquewhite'
-        } {% endcomment %}
+        // {% comment %} for(const i of mpwd_set){
+        //     span=document.getElementById('texthere'+i);
+        //     span.textContent = ++cnt;
+        //     span.style.color='antiquewhite'
+        // } {% endcomment %}
     }
     // Submit post on submit
     var form = document.getElementById('post-form');

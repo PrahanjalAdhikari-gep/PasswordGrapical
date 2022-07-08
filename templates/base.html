@@ -23,8 +23,6 @@
         body::-webkit-scrollbar {
             display: none;
         }
-
-
         /*REGISTER MOVING PAGE */
         /* body {
             margin: 0;
@@ -33,93 +31,11 @@
             display: grid;
             place-items: center;
             } */
-            
             .main {
                 display: flex;
                 overflow: hidden;
                 background: rgba(0,0,0,0.5);
                 height: 300px;
-            }
-
-
-            .story-nav{
-                    .primary-navigation {
-                    margin: 0 auto;
-                    display: block;
-                    padding: 120px 0 0 0;  
-                    text-align: center;
-                    font-size: 16px;
-
-                    ul li {
-                    list-style: none;
-                    margin: 0 auto;
-                    border-left: 2px solid #3ca0e7;
-                    display: inline-block;
-                    padding: 0 30px;
-                    position: relative;
-                    text-decoration: none;
-                    text-align: center;
-                    font-family: arvo;
-                    }
-
-                    li a {
-                    color: black;
-                    }
-
-                    li a:hover {
-                    color: #3ca0e7;
-                    }
-
-                    li:hover {
-                    cursor: pointer;
-                    }
-
-                    ul li ul {
-                    visibility: hidden;
-                    opacity: 0;
-                    position: absolute;
-                    padding-left: 0;
-                    left: 0;
-                    display: none;
-                    background: white;
-                    }
-
-                    ul li:hover > ul,
-                    ul li ul:hover {
-                    visibility: visible;
-                    opacity: 1;
-                    display: block;
-                    min-width: 250px;
-                    text-align: left;
-                    padding-top: 20px;
-                    box-shadow: 0px 3px 5px -1px #ccc;
-                    }
-
-                    ul li ul li {
-                    clear: both;
-                    width: 100%;
-                    text-align: left;
-                    margin-bottom: 20px;
-                    border-style: none;
-                    }
-
-                    ul li ul li a:hover {
-                    padding-left: 10px;
-                    border-left: 2px solid #3ca0e7;
-                    transition: all 0.3s ease;
-                    }
-                }
-                                a {
-
-                    text-decoration: none;
-
-                    &:hover {
-                        color: #3CA0E7;
-                    }
- 
-                    }   
-
-                ul li ul li a { transition: all 0.5s ease; }
             }
             .main img {
             max-width: 100%;
@@ -128,28 +44,22 @@
             box-sizing: border-box;
             transition: opacity .2s;
             }
-            
             .main:hover img {
             opacity: 0.5;
             }
-            
             .main img:hover {
             opacity: 1;
             }
-            
             .main .single-column {
             animation: var(--animation, none) 16s infinite linear;
             }
-            
             .main .single-column:hover {
             animation-play-state: paused;
             }
-            
             .main .single-column:nth-of-type(odd) {
             align-self: flex-end;
             --direction: 50%;
             }
-            
             @keyframes slide {
             to {
                 -webkit-transform: translateY(var(--direction, -50%));
@@ -241,6 +151,26 @@ LOGIN PAGE OVER */
         .no-gutters {
             margin-right: 30px;
             margin-left: 0;
+        }
+        .btn-primary{
+            color: black;
+            background-color: antiquewhite;
+            border-color: antiquewhite;
+        }
+        .btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle {
+            color: antiquewhite;
+            background-color: rgba(0,0,0,0.5);
+            border-color: antiquewhite;
+        }
+        .btn-primary:hover {
+            color: antiquewhite;
+            background-color: rgba(0,0,0,0.5);
+            border-color: antiquewhite;
+        }
+        li{
+            padding: 10px ;
+            float: left;
+            width: 50%;
         }
         .btn-outline-info {
             color: antiquewhite;
@@ -406,6 +336,7 @@ LOGIN PAGE OVER */
                     <a href="{% url 'register_new' %}">Register Pattern</a>
                     <a href="{% url 'register_graphical' %}">Register Graphical</a>
                     <a href="{% url 'register_story' %}">Register Story</a>
+                    <a href="{% url 'register_moving' %}">Register Moving</a>
                 </div>
             </button>
             </div> 
