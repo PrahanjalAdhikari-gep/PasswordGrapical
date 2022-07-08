@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Login Page
+{% endblock %}
+
+{% block content %}
+<div class="mx-auto" style="width: 400px; padding: 32px 0px">
+    <div class="content-section">
+        <form class="" action="" method="post" id="post-form">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Login</legend>
+            </fieldset>
+
+            <div class="form-group">
+                <label for="username">UsernamE:</label>
+                <input type="text" class="form-control" id="username" value='{{ uname }}'>
+            </div>
+
+            <br>
+            {% include 'pwd_moving.html' %}
+
+            <br>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-outline-info">Sign In</button>
+            </div>
+        </form>
+        <div class="border-top pt-3">
+            <small class="text-muted">
+                Forgot password? <a href="{% url 'reset' %}" class="ml-2">Click here</a>
+            </small>
+        </div>
+        <div class="border-top pt-3">
+            <small class="text-muted">
+                Don't have an account? <a href="{% url 'register' %}" class="ml-2">Sign Up</a>
+            </small>
+        </div>
+    </div>
+</div>
+
+<script>
+        var mpwd_set = new Set();
+    var mimages = 0;
+    var mrealpwd = new Set();
+    function onSelect(r, c) {
+        var res = r.toString() + c.toString();
+        if (mpwd_set.has(res)) {
+            console.log('true');
+            mpwd_set.delete(res);
+            document.getElementById(res).style.border = null;
+        } else {
+            mpwd_set.add(res);
+            document.getElementById(res).style.border = "2px solid red";
+        }
+
+        console.log(mpwd_set);
+    }
+
+    function post(path, params, method = 'post') {
+
+        // The rest of this code assumes you are not using a library.
+        // It can be made less wordy if you use one.
+        const form = document.getElementById('post-form');
+        form.method = method;
+        form.action = path;
+
+        for (const key in params) {
+            if (params.hasOwnProperty(key)) {
+                const hiddenField = document.createElement('input');
+                hiddenField.type = 'hidden';
+                hiddenField.name = key;
+                hiddenField.value = params[key];
+
+                form.appendChild(hiddenField);
+            }
+        }
+
+        document.body.appendChild(form);
+        form.submit();
+    }
+
+    function CallOfferRenderAction(r,c,src) {
+        var res = r.toString() + c.toString();
+        let span;
+        if (mpwd_set.has(res)) {
+            mimages=mimages-1;
+            console.log('true');
+            mpwd_set.delete(res);
+            mrealpwd.delete(src.toString())
+            document.getElementById(res).style.border = null;
+            {% comment %} span = document.getElementById('texthere'+res);
+            span.textContent = '';
+            span.style.color='antiquewhite' {% endcomment %}
+        } else {
+            mimages=mimages+1;
+            mpwd_set.add(res);
+            document.getElementById(res).style.border = "2px solid red";
+            mrealpwd.add(src.toString());
+            console.log(res)
+            console.log(src)
+        }
+        var cnt=0;
+        {% comment %} for(const i of mpwd_set){
+            span=document.getElementById('texthere'+i);
+            span.textContent = ++cnt;
+            span.style.color='antiquewhite'
+        } {% endcomment %}
+    }
+    // Submit post on submit
+    var form = document.getElementById('post-form');
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        if(mrealpwd.size===0){
+            alert("Atleast select one picture");
+        }
+        else{
+            console.log("form submitted!");
+            post('', {
+                username: document.getElementById('username').value,
+                password: Array.from(mrealpwd),
+            })
+        }
+    });
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<!-- <input type="button" value="View" class="viewbtn" onclick="CallOfferRenderAction($(this).attr('offercode'), $(this).attr('providercode'))" offercode="ATT-COMP-DTV-PRM-ALL-INCL_SEPARATOR_ATT-COMP-HSIA-PLS-A" providercode="ATTv6"> -->
+{% endblock %}

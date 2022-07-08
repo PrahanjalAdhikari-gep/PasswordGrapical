@@ -432,7 +432,7 @@ def login_page_moving(request):
             'uname': request.GET['uname'],
             'p_images': get_pwd_imgs(),
         }
-        return render(request, 'login_new.html', context=data)
+        return render(request, 'login_moving.html', context=data)
 
 def login_page(request):
     if request.method == 'POST':
