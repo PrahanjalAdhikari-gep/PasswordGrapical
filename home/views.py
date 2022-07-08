@@ -248,7 +248,7 @@ def register_moving(request):
             print(e)
             messages.warning(request, 'Error while creating Account!')
         
-        return redirect(request, 'register_moving.html')
+        return redirect('home')
     else:
         data = {
             'p_images': get_pwd_imgs(),
@@ -606,6 +606,9 @@ def login_init(request):
             if(typ == 2):
                 return param_redirect(request,'login_graphical')
             
+            if(typ == 4):
+                return param_redirect(request,'login_moving')
+                
             return param_redirect(request,'login_story')
             
 
